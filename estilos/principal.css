@@ -1,0 +1,209 @@
+body {
+	background-color: #cafafd;
+	
+	
+}
+
+#todo{
+	width: 900px;
+	margin: 0 auto;
+    background-color: white;
+    border: thin blue solid;	
+}
+
+#cabecera{
+   background-color: blue;
+   height: 50px;
+   color:white;	
+}
+
+#pie{
+   background-color: blue;
+   height: 25px;
+   color:white;	
+}
+#barraLogin{
+	background-color: #779922;
+	color: black;
+	padding: 5px;
+	
+}
+#barraMenu{
+	background-color: #00ddaa;
+	color: black;
+	padding:5px;
+}
+
+#barraMenu ul{
+	padding:0px;
+	margin: 0px;
+}
+#barraMenu ul li
+{
+	display: inline;
+	list-style: none;
+	
+	padding-right: 5px;
+	border-right: solid black thin;
+}
+
+#barraMenu ul li a
+{
+  	text-decoration: none;
+}
+
+#barraMenu ul li a:hover
+{
+  	background-color: yellow;
+  	color: red;
+  	
+}
+
+
+#conte{
+	background-color: #f2f6f6;	
+	color:blue;
+	
+}
+
+#conte a{
+	text-decoration: none;
+	color:#5082c6;
+}
+
+#conte a:hover{
+	font-size: 1.2em;
+	color: red;
+}
+#conte h1{
+	color:#86afe8;
+}
+
+.error{
+	border: red thin solid;
+	background-color:#ffb1c7;
+	color: red;
+}
+
+/*definiciones de tabla para
+ * el objeto CGrid con el estilo
+ * por defecto clase tabla
+ */
+
+table.tabla{
+	background-color: #b6c7cd;
+	border-collapse: collapse;
+}
+
+table.tabla th{
+	background-color: blue;
+	color:white;
+}
+
+table.tabla tr.par{
+	background-color: #edd8d8;
+	color:black;
+}
+table.tabla tr.impar{
+	background-color: #f8f0d6;
+	color:black;
+}
+
+table.tabla tr td{
+	padding: 2px;
+}
+
+/*
+ * Definiciones de tabla para
+ * el objeto CGrid con estilo 
+ * propio
+ */
+table.tabla1{
+	background-color: #b6c7cd;
+	border-collapse: collapse;
+}
+
+table.tabla1 th{
+	background-color: blue;
+	color:white;
+}
+
+table.tabla1 tr.par{
+	background-color: #edd8d8;
+	color:black;
+}
+table.tabla1 tr.impar{
+	background-color: #f8f0d6;
+	color:black;
+}
+
+table.tabla1 tr td{
+	padding: 2px;
+}
+
+.pager{
+	background-color: white;
+	color:black;
+}
+
+.pager .izq{
+	float: left;
+	//width: 40%;
+	padding-left: 5px;
+	color: green; 
+}
+
+.pager .der{
+	float: right;
+	//width: 58%;
+	text-align: right;
+	padding-right: 5px;' 
+}
+
+.pager .der a{
+	text-decoration: none;
+	color:green;
+}
+.pager .der a:hover{
+	text-decoration: none;
+	color:red;
+}
+
+.pager .final{
+	clear: both;
+}
+
+
+
+.caja_menu{
+	float:right;
+	width: 20%;
+	border:solid black thin;
+	padding:5px;
+	background-color: #fdad01; 
+	color: white;	
+}
+
+.caja_menu a{
+	text-decoration: none;
+	color:white;
+}
+.caja_menu a:hover{
+}
+
+.caja
+{
+background-color: #ef9b17;
+color: #118ef8;
+}
+.caja .titulo
+{
+border: thin red solid;
+padding: 3px;
+}
+.caja .cuerpo
+{
+border: thin red solid;
+padding: 3px;
+background-color: #ffe3ae;
+}
