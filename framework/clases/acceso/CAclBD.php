@@ -20,7 +20,6 @@ class CAclBD extends CAcl
 		
 	}
 	
-	//Metodos
 	private function existeRole($nombre)
 	{
 		if (!$this->hayEnlace)
@@ -66,7 +65,7 @@ class CAclBD extends CAcl
 		return ($fila["codrol"]);
 	}
 	
-	
+	//Metodos
 	function anadirRole($nombre,$puedeAcceder,$puedeConfigurar){
 		$puedeAcceder= $puedeAcceder?'1':'0';
 		$puedeConfigurar=$puedeConfigurar?'1':'0';
@@ -104,29 +103,7 @@ class CAclBD extends CAcl
 		return $codRole;
 	}
 	
-	function setCodRole($nick, $codRole){
-		if (!$this->hayEnlace)
-		    return false;
-		
-		if (!$this->existeUsuario($nick))
-		  	return false;
-		
-		$nick=$this->convertirNick($nick);
-		$codRole=intval($codRole);		
-		
-		$sentencia="update usuarios set ".
-     				"		codrol=$codRole".
-					"  where nick='$nick'";
-		
-		$consulta=$this->enlaceBD->crearConsulta($sentencia);
-		if ($consulta->error()!=0)
-		    return false;
-	
-		
-		return true;
-	}
-	
-	function anadirUsuario($nombre_apellidos, $dni, $email, $tlf, $fecha_nac, $nick, $contrasena, $codRole){
+	function anadirUsuario($nombre,$nick,$contrasena,$codRole){
 		if (!$this->hayEnlace)
 		    return false;
 		
@@ -134,9 +111,8 @@ class CAclBD extends CAcl
 		  	return false;
 		
 		$nick=$this->convertirNick($nick);
-		$nombre_apellidos=str_replace("'", "''", $nombre_apellidos);
-		$nombre_apellidos=substr($nombre_apellidos, 0,30);
-		$fecha_nac=CGeneral::fechaNormalAMysql($fecha_nac);
+		$nombre=str_replace("'", "''", $nombre);
+		$nombre=substr($nombre, 0,30);
 		$contrasena=str_replace("'", "''", $contrasena);
 		$contrasena=substr($contrasena, 0,30);
 		$codRole=intval($codRole);
@@ -144,9 +120,9 @@ class CAclBD extends CAcl
 		    return false;
 		
 		$sentencia="insert into usuarios (".
-					"       nombre_apellidos, dni, email, tlf, fecha_nac, nick, contrasenia, codrol".
+					"       nombre, nick, contrasenia, codrol".
 					"			) values ( ".
-					"       '$nombre_apellidos', '$dni', '$email', '$tlf', '$fecha_nac', '$nick', md5('$contrasena'), $codRole".
+					"       '$nombre', '$nick', md5('$contrasena'), $codRole".
 					"			)";
 		$consulta=$this->enlaceBD->crearConsulta($sentencia);
 		if ($consulta->errno()!=0)
@@ -157,9 +133,12 @@ class CAclBD extends CAcl
 		
 	}
 
+
+
 	private function convertirNick($nick)
 	{
 		$nick=str_replace("'", "''", strtoupper($nick));
+		$nick=substr($nick, 0,30);
 		return $nick;
 	}
 	public function existeUsuario($nick)
@@ -252,9 +231,9 @@ class CAclBD extends CAcl
 		
 		$nick=$this->convertirNick($nick);
 		
-		$sentencia="select * ".
-     				"		from usuarios  ".
-          			"		where nick='$nick'";
+		$sentencia="select u.nombre ".
+     				"		from usuarios u ".
+          			"		where u.nick='$nick'";
 		
 		$consulta=$this->enlaceBD->crearConsulta($sentencia);
 		if ($consulta->error()!=0)
@@ -269,7 +248,7 @@ class CAclBD extends CAcl
 		
 	}
 	
-	function setNombre($nick, $nombre_apellidos){
+	function setNombre($nick,$nombre){
 		if (!$this->hayEnlace)
 		    return false;
 		
@@ -282,8 +261,7 @@ class CAclBD extends CAcl
 		
 		
 		$sentencia="update usuarios set ".
-     				"		nombre_apellidos='$nombre_apellidos'".
-					" where nick='$nick'";
+     				"		nombre='$nombre'";
 		
 		$consulta=$this->enlaceBD->crearConsulta($sentencia);
 		if ($consulta->error()!=0)
@@ -298,11 +276,11 @@ class CAclBD extends CAcl
 	{
 		
 		$usu=array();
-		$sentencia="SELECT us.nombre_apellidos, us.dni, us.email, us.tlf, us.fecha_nac, us.nick ".
+		$sentencia="SELECT us.nombre,us.nick, ".
 					"		r.nombre as nombre_rol ".
 					"	FROM usuarios us ".
          			"		join roles r using (codrol)".
-					"	order by nombre_apellidos";
+					"	order by nombre";
 		
 		$consulta=$this->enlaceBD->crearConsulta($sentencia);
 		if ($consulta->error()!=0)
@@ -310,11 +288,7 @@ class CAclBD extends CAcl
 		
 		while ($fila=$consulta->fila())
 		{
-			$usu[]=array("NOMBRE_APELLIDOS"=>$fila["nombre"],
-						 "DNI"=>$fila["dni"],
-						 "EMAIL"=>$fila["email"],
-						 "TLF"=>$fila["tlf"],
-						 "FECHA_NAC"=>$fila["fecha_nac"],
+			$usu[]=array("NOMBRE"=>$fila["nombre"],
 			             "NICK"=>$fila["nick"],
 						 "ROLE"=>$fila["nombre_rol"]);
 		}
