@@ -8,7 +8,7 @@
 		{
 			$this->_conexion=new mysqli($servidor,$usuario,
 							$contrasenia,$nombreBD);
-			
+			$this->_conexion->set_charset("utf8");
 		}
 		
 		public function error()
