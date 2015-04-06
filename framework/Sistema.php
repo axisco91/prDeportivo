@@ -18,7 +18,8 @@
 											"CAcceso"=>"/acceso/CAcceso.php",
 											"CAcl"=>"/acceso/CAcl.php",
 											"CAclBD"=>"/acceso/CAclBD.php",
-											"CCaja"=>"/widget/CCaja.php"
+											"CCaja"=>"/widget/CCaja.php",
+											"CBarraMenu"=>"/widget/CBarraMenu.php"
 										);
 		static private $_rutasInclude=array();
 		static private $_app;
